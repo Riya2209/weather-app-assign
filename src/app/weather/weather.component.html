@@ -1,0 +1,44 @@
+<div class='app'>
+    <div class='error' *ngIf="errorMessage">{{ errorMessage }}</div>
+    <div class='search'>
+      <input
+        [(ngModel)]='location'
+        (keypress)='searchLocation($event)'
+        placeholder='Enter location'
+        type='text' />
+    </div>
+    <div class='container'>
+      <div class='top'>
+        <div class='location'>
+          <p>{{ data.name }}</p>
+        </div>
+        <div class='temp'>
+          <h1 *ngIf='data.main'>{{ temperature }}{{ isCelsius ? '°C' : '°F' }}</h1>
+          <mat-slide-toggle [(ngModel)]="isCelsius" color="green"></mat-slide-toggle>
+          <span *ngIf="isCelsius === true">Celsius</span>
+          <span *ngIf="isCelsius === false">Fahrenhiet</span> 
+        </div>
+        <div class='weather-image'>
+            <img [src]="imageUrl" height="100px" width="100px" alt="Weather Image">
+          </div>
+        <div class='desc'>
+          <p *ngIf='data.weather'>{{ data.weather[0].main }}</p>
+        </div>
+      </div>
+      <div class='bottom' *ngIf='data.name !== undefined'>
+        <div class='feels'>
+          <p class='bold'>{{ feelsLike }}{{ isCelsius ? '°C' : '°F' }}</p>
+          <p>Feels Like</p>
+        </div>
+        <div class='humidity'>
+          <p class='bold'>{{ data.main.humidity }}%</p>
+          <p>Humidity</p>
+        </div>
+        <div class='wind'>
+          <p class='bold'>{{ data.wind.speed }}MPH</p>
+          <p>Wind Speed</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
